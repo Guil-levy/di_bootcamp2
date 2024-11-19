@@ -6,6 +6,24 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Shabbat Times for Tel-Aviv</h1>
+    <div id="shabbat-times"></div>
+  
+    <script>
+      // Fetch Shabbat times from the Hebcal API
+      fetch('https://www.hebcal.com/shabbat?cfg=json&geo=Tel%20Aviv')
+        .then(response => response.json())
+        .then(data => {
+          // Display the times in the webpage
+          const shabbatTimes = data.items;
+          let timesHtml = '';
+          shabbatTimes.forEach(item => {
+            timesHtml += `<p>${item.title}: ${item.date}</p>`;
+          });
+          document.getElementById('shabbat-times').innerHTML = timesHtml;
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
     <script src="ex1.js"></script>
 </body>
 </html>
